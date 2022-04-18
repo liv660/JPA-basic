@@ -1,7 +1,5 @@
 package chapter05;
 
-import org.hibernate.type.LocalDateTimeType;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -36,11 +34,10 @@ public class EntityMapping {
             em.persist(memberB);
             tx.commit();
         } catch (Exception e) {
-
+            tx.rollback();
         } finally {
             em.close();
         }
-
         emf.close();
     }
 }
