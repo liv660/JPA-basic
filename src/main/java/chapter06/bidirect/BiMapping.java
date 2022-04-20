@@ -1,4 +1,4 @@
-package chpater06.bidirect;
+package chapter06.bidirect;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

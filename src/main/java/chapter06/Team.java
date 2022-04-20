@@ -1,26 +1,24 @@
-package chpater06.bidirect;
+package chapter06;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "six_bi_team")
+@Entity(name = "six_team")
 public class Team {
     @Id @GeneratedValue
     @Column(name = "team_id")
     private Long id;
-
-    @OneToMany(mappedBy = "team")
-    private List<Member> members = new ArrayList<>();
 
     private String name;
 }

@@ -1,7 +1,7 @@
-package chpater06.example;
+package chapter06.example;
 
-import chpater06.example.domain.Order;
-import chpater06.example.domain.OrderItem;
+import chapter06.example.domain.Order;
+import chapter06.example.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

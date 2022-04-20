@@ -1,4 +1,4 @@
-package chpater06;
+package chapter06;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

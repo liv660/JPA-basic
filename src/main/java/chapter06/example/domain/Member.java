@@ -1,4 +1,4 @@
-package chpater06.example.domain;
+package chapter06.example.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;

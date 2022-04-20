@@ -1,4 +1,4 @@
-package chpater06;
+package chapter06.bidirect;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,21 +11,16 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "six_member")
+@Entity(name = "six_bi_member")
 public class Member {
     @Id @GeneratedValue
+    @Column(name = "memeber_id")
     private Long id;
 
-    @Column(name = "name")
-    private String userName;
-
-    //단방향 연관관계 설정 후
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
 
-    /*  단방향 연관관계 설정 전
-    @Column(name = "team_id")
-    private Long teamId;
-    */
+    @Column(name = "username")
+    private String userName;
 }
