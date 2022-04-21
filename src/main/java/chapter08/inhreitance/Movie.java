@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "eight_movie_I")
+@Entity(name = "eight_movie")
 //@DiscriminatorValue("")   //default = entity name
 public class Movie extends Item {
     private String director;

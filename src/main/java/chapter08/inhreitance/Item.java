@@ -11,7 +11,7 @@ import javax.persistence.*;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "eight_item_I")
+@Entity(name = "eight_item")
 @Inheritance(strategy = InheritanceType.JOINED /* JOINED | SINGLE_TABLE | TABLE_PER_CLASS */)
 @DiscriminatorColumn
 public abstract class Item {
