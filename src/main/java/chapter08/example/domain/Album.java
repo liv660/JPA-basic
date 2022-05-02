@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Data
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "ex_eight_album")
+@DiscriminatorValue("ex_album")
 public class Album extends Item {
     private String artist;
     private String ect;

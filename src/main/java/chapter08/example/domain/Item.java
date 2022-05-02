@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "ex_eight_item")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "ex_item_type")
 public abstract class Item extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "item_id")

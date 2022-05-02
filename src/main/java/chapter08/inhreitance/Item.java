@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity(name = "eight_item")
 @Inheritance(strategy = InheritanceType.JOINED /* JOINED | SINGLE_TABLE | TABLE_PER_CLASS */)
-@DiscriminatorColumn
+//@DiscriminatorColumn
 public abstract class Item {
     @Id @GeneratedValue
     @Column(name = "item_id")
