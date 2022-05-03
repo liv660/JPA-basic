@@ -1,6 +1,7 @@
 package chapter11.jpql;
 
 import chapter11.jpql.domain.Member;
+import chapter11.jpql.domain.Team;
 
 import javax.persistence.*;
 import java.util.List;
@@ -45,6 +46,20 @@ public class JpqlMain {
             for(Member m : resultB) {
                 System.out.println("member = " + m);
             }
+
+            //[4] 조인 - 내부 조인
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
+
+            memberA.setTeam(teamA);
+            em.flush();
+            em.clear();
+
+            String queryD = "SELECT m FROM eleven_member m INNER JOIN m.team t";
+            List<Member> resultC = em.createQuery(queryD, Member.class).getResultList();
+            System.out.println("[JOIN] resultC SIZE :: " + resultC.size());
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
