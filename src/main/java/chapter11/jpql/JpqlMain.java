@@ -60,6 +60,11 @@ public class JpqlMain {
             List<Member> resultC = em.createQuery(queryD, Member.class).getResultList();
             System.out.println("[JOIN] resultC SIZE :: " + resultC.size());
 
+            //[5] 서브쿼리 - FROM절에 사용 불가능
+            //String queryE = "SELECT x.username FROM (SELECT new chapter11.jpql.domain.Member(m.username, m.age) FROM eleven_member m WHERE m.age = 50) x";
+            //String resultD = em.createQuery(queryE, String.class).getSingleResult();
+            //System.out.println("[SUBQUERY] resultD :: " + resultD);
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
