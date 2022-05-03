@@ -1,5 +1,7 @@
 package chapter11.jpql;
 
+import chapter08.example.domain.Book;
+import chapter08.example.domain.Item;
 import chapter11.jpql.domain.Member;
 import chapter11.jpql.domain.Team;
 
@@ -64,6 +66,11 @@ public class JpqlMain {
             //String queryE = "SELECT x.username FROM (SELECT new chapter11.jpql.domain.Member(m.username, m.age) FROM eleven_member m WHERE m.age = 50) x";
             //String resultD = em.createQuery(queryE, String.class).getSingleResult();
             //System.out.println("[SUBQUERY] resultD :: " + resultD);
+
+            //[6] JPQL 타입 표현 - 엔티티 타입
+            String queryF = "SELECT i FROM ex_eight_item i WHERE type(i) = ex_eight_book";  //type(E) = Entity, 상속 관계에서 사용
+            List<Item> resultE = em.createQuery(queryF, Item.class).getResultList();
+            System.out.println("[JPQL_TYPE] resultE SIZE :: " + resultE.size());
 
             tx.commit();
         } catch (Exception e) {
