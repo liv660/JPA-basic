@@ -1,11 +1,11 @@
 package chapter11.jpql;
 
-import chapter08.example.domain.Book;
 import chapter08.example.domain.Item;
 import chapter11.jpql.domain.Member;
 import chapter11.jpql.domain.Team;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 public class JpqlMain {
@@ -71,6 +71,17 @@ public class JpqlMain {
             String queryF = "SELECT i FROM ex_eight_item i WHERE type(i) = ex_eight_book";  //type(E) = Entity, 상속 관계에서 사용
             List<Item> resultE = em.createQuery(queryF, Item.class).getResultList();
             System.out.println("[JPQL_TYPE] resultE SIZE :: " + resultE.size());
+
+            System.out.println("\n----------------------------------------");
+            //객체지향 쿼리 언어2
+            //[1] 경로 표현식
+            //[1-1] 상태 필드, 경로 탐색의 끝
+            List<String> resultAa = em.createQuery("SELECT m.username FROM eleven_member m", String.class).getResultList();
+            //[1-2] 단일 값 경로, 묵시적 내부조인 발생(+ 탐색 O)
+            List<Team> resultAb = em.createQuery("SELECT m.team FROM eleven_member m", Team.class).getResultList();
+            //[1-3] 컬렉션 값 경로, 묵시적 내부조인 발생(탐색 X)
+            Collection resultAc = em.createQuery("SELECT t.members FROM eleven_team t", Collection.class).getResultList();
+
 
             tx.commit();
         } catch (Exception e) {
