@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JpqlMain {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpql");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("shop");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
@@ -82,6 +82,44 @@ public class JpqlMain {
             //[1-3] 컬렉션 값 경로, 묵시적 내부조인 발생(탐색 X)
             Collection resultAc = em.createQuery("SELECT t.members FROM eleven_team t", Collection.class).getResultList();
 
+            //[2] 패치 조인
+            //[2-1]회원을 조회하면서 연관된 팀도 함께 조회하기
+            Member memberB = new Member("memberB");
+            memberB.setTeam(teamA);
+            em.persist(memberB);
+
+            Team teamB = new Team("teamB");
+            em.persist(teamB);
+
+            Member memberC = new Member("memberC");
+            memberC.setTeam(teamB);
+            em.persist(memberC);
+
+            em.flush();
+            em.clear();
+
+            List<Member> resultBa = em.createQuery("SELECT m FROM eleven_member m join fetch m.team", Member.class).getResultList();
+            System.out.println("-------------------");
+            System.out.println("USERNAME\tTEAM");
+            for(Member m :  resultBa) {
+                System.out.println(m.getUsername() + "\t\t" + m.getTeam().getName());
+            }
+            System.out.println("-------------------");
+
+            //[2-2] 일대다 관계, 컬렉션 패치 조인
+            List<Team> resultBb = em.createQuery("SELECT DISTINCT t FROM eleven_team t join fetch t.members", Team.class).getResultList();
+            System.out.println("---------------------------------------------------------");
+            System.out.println("TEAM\tSIZE\tMEMBER");
+            StringBuilder sb = new StringBuilder();
+            for(Team t : resultBb) {
+                sb.append(t.getName()).append("\t").append(t.getMembers().size()).append("\t\t");
+                for(Member m : t.getMembers()) {
+                    sb.append(m).append(" ");
+                }
+                sb.append("\n");
+            }
+            System.out.printf("%s", sb);
+            System.out.println("---------------------------------------------------------");
 
             tx.commit();
         } catch (Exception e) {
